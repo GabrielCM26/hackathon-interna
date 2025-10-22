@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PlantCardGrid from '../components/plantcard.jsx';
+import PlantCardGrid from '../components/PlantCardGrid.jsx';
 
 export default function TreePlantingApp() {
   const [activeTab, setActiveTab] = useState('activity');

@@ -11,7 +11,12 @@
     "start": "NODE_ENV=production node server.js",
     "seed": "node seeds/seedData.js"
   },
-  "keywords": ["verde", "sustentabilidade", "meio-ambiente", "hackathon"],
+  "keywords": [
+    "verde",
+    "sustentabilidade",
+    "meio-ambiente",
+    "hackathon"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
