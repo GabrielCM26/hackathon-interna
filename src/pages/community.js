@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PlantCardGrid from '../components/plantcard.jsx';
+import PlantCardGrid from '../components/PlantCardGrid.jsx';
 
 export default function TreePlantingApp() {
   const [activeTab, setActiveTab] = useState('activity');
@@ -27,6 +27,15 @@ export default function TreePlantingApp() {
   const handleCreateEvent = async () => {
     setLoading(true);
     try {
+      const randomImages = [
+        'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1445820135715-50c1e1b561fb?w=800&h=600&fit=crop',
+      ];
+      const imageUrl = randomImages[Math.floor(Math.random() * randomImages.length)];
+
       const res = await fetch('/api/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -35,6 +44,7 @@ export default function TreePlantingApp() {
           description: 'A community member just planted a new tree!',
           location: 'Lisboa, Portugal',
           date: new Date(),
+          imageUrl,
         }),
       });
 
@@ -87,7 +97,9 @@ export default function TreePlantingApp() {
           </div>
           <div className="mb-4">
             <p className="text-sm text-gray-600">How are you Enzo,</p>
-            <h1 className="text-3xl font-bold text-gray-900">Help us save the earth</h1>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Help us save the earth
+            </h1>
           </div>
         </div>
 
