@@ -33,6 +33,15 @@ const eventSchema = new mongoose.Schema({
     type: String,
     default: 'Verde Lab',
   },
+
+  icon: {
+    type: String,
+    default: '🌿',
+  },
+  liked: {
+    type: Boolean,
+    default: false, 
+  },
 }, {
   timestamps: true,
 });

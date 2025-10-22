@@ -20,6 +20,9 @@ app.use('/api/trees', require('./routes/trees'));
 // Doações
 app.use('/api/donations', require('./routes/donations'));
 
+// Eventos
+app.use('/api/events', require('./routes/events'));
+
 // Health check da API
 app.get('/api/health', (req, res) => {
   res.json({
