@@ -1,13 +1,19 @@
 {
   "name": "hackathon-interna",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Backend e Frontend (Next.js + Express + MongoDB) - VerdeLab Hackathon",
   "private": true,
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "server": "nodemon server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "server": "nodemon server.js"
+    "seed": "node seeds/seedData.js"
   },
+  "keywords": ["verde", "sustentabilidade", "meio-ambiente", "hackathon"],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -15,8 +21,8 @@
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.2",
     "next": "^16.0.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

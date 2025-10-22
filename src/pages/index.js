@@ -18,7 +18,7 @@ export default function Home() {
             <Link href="/community" passHref>
               <button
                 className=" font-serif w-fit mx-auto px-6 py-4 flex justify-center text-sm rounded-2xl bg-emerald-600 opacity-95 text-white
-               font-semibold shadow-lg active:scale-95 transform transition mb-5">
+               font-semibold shadow-lg active:scale-95 transform transition mb-5 cursor-pointer">
                 Plant a tree
               </button>
             </Link>
