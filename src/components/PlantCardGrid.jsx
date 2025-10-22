@@ -1,13 +1,26 @@
-export default function PlantCardGrid({ recentPlants, viewMode, toggleLike }) {
+export default function PlantCardGrid({ recentPlants = [], viewMode, toggleLike }) {
+  if (!Array.isArray(recentPlants)) return null;
+
   return (
     <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-4 mb-6' : 'flex flex-col gap-4 mb-6'}>
       {recentPlants.map((plant) => (
-        <div key={plant.id} className={`relative bg-white rounded-2xl shadow-md overflow-hidden ${viewMode === 'list' ? 'flex items-center gap-4 p-3' : ''}`}>
-          <div className={viewMode === 'list' ? 'w-20 h-20 flex-shrink-0 relative rounded-xl overflow-hidden' : 'relative h-48'}>
+        <div
+          key={plant.id}
+          className={`relative bg-white rounded-2xl shadow-md overflow-hidden ${
+            viewMode === 'list' ? 'flex items-center gap-4 p-3' : ''
+          }`}
+        >
+          <div
+            className={
+              viewMode === 'list'
+                ? 'w-20 h-20 flex-shrink-0 relative rounded-xl overflow-hidden'
+                : 'relative h-48'
+            }
+          >
             <img
               src={plant.image}
               alt={plant.tree}
-              className={viewMode === 'list' ? 'w-full h-full object-cover' : 'w-full h-full object-cover'}
+              className="w-full h-full object-cover"
             />
             <button
               onClick={() => toggleLike(plant.id)}
