@@ -3,19 +3,25 @@ import { Heart, User } from 'lucide-react';
 
 // Plant Card Component
 function PlantCard({ plant, viewMode, toggleLike, type }) {
+  // Determine subtitle based on type
+  const subtitle =
+    type === 'my'
+      ? `Planted ${plant.tree}` // My plants
+      : plant.event || plant.tree; // Activity or favorites
+
   if (viewMode === 'list') {
     return (
       <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-3">
         <div className="flex gap-3 p-3">
           <img
             src={plant.image}
-            alt={plant.tree}
+            alt={plant.tree || plant.event}
             className="w-24 h-24 object-cover rounded-xl"
           />
           <div className="flex-1 flex flex-col justify-between">
             <div>
               <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
-              <p className="text-xs text-gray-600 capitalize"> {plant.tree}</p>
+              <p className="text-xs text-gray-600 capitalize">{subtitle}</p>
             </div>
             <div className="flex items-center justify-between">
               <p className="text-xs text-green-600 flex items-center gap-1">
@@ -28,7 +34,7 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
               >
                 <Heart
                   size={18}
-                  fill={plant.liked ? "currentColor" : "none"}
+                  fill={plant.liked ? 'currentColor' : 'none'}
                   strokeWidth={2}
                 />
               </button>
@@ -44,7 +50,7 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
       <div className="relative">
         <img
           src={plant.image}
-          alt={plant.tree}
+          alt={plant.tree || plant.event}
           className="w-full h-40 object-cover"
         />
         <button
@@ -54,14 +60,14 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
           <Heart
             size={20}
             className="text-red-500"
-            fill={plant.liked ? "currentColor" : "none"}
+            fill={plant.liked ? 'currentColor' : 'none'}
             strokeWidth={2}
           />
         </button>
       </div>
       <div className="p-3">
         <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
-        <p className="text-xs text-gray-600 capitalize mb-2">{plant.event}</p>
+        <p className="text-xs text-gray-600 capitalize mb-2">{subtitle}</p>
         <p className="text-xs text-green-600 flex items-center gap-1">
           <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
           {plant.time}
@@ -108,7 +114,7 @@ export default function TreePlantingApp() {
     {
       id: 101,
       image: 'https://images.unsplash.com/photo-1602165426016-3b5eb1787655?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735',
-      name: 'Your Plant 1',
+      name: 'My plant 1',
       tree: 'Maple tree',
       time: 'Yesterday',
       liked: false
@@ -116,7 +122,7 @@ export default function TreePlantingApp() {
     {
       id: 102,
       image: 'https://images.unsplash.com/photo-1572990479313-f2403a39dc63?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
-      name: 'Your Plant 2',
+      name: 'My plant 2',
       tree: 'Pine tree',
       time: '2 days ago',
       liked: true
