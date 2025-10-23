@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PlantCardGrid from '../components/PlantCardGrid.jsx';
 import AddTreeForm from '../components/AddTreeForm.jsx';
 import Navbar from '../components/Navbar.jsx';
+import Link from 'next/link';
 import { User } from 'lucide-react';
 
 export default function Community() {
@@ -109,14 +110,13 @@ export default function Community() {
               Ajude-nos a salvar a terra
             </h1>
           </div>
-
           {/* Ícone de Perfil */}
-          <a
+          <Link
             href="/profile"
             className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
           >
             <User className="w-5 h-5" strokeWidth={2} />
-          </a>
+          </Link>
         </div>
 
         {/* Tabs */}
