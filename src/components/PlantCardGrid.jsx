@@ -13,7 +13,7 @@ export default function PlantCardGrid({ recentPlants = [], viewMode, toggleLike 
           <div
             className={
               viewMode === 'list'
-                ? 'w-20 h-20 flex-shrink-0 relative rounded-xl overflow-hidden'
+                ? 'w-20 h-20 shrink-0 relative rounded-xl overflow-hidden'
                 : 'relative h-48'
             }
           >

@@ -1,111 +1,127 @@
 import React, { useState, useEffect } from 'react';
 import PlantCardGrid from '../components/PlantCardGrid.jsx';
+import AddTreeForm from '../components/AddTreeForm.jsx';
+import Navbar from '../components/Navbar.jsx';
+import { User } from 'lucide-react';
 
-export default function TreePlantingApp() {
+export default function Community() {
   const [activeTab, setActiveTab] = useState('activity');
   const [viewMode, setViewMode] = useState('grid');
-  const [events, setEvents] = useState([]); // Events from backend (MongoDB)
+  const [plants, setPlants] = useState([]); // 🌿 Todos los eventos del backend
+  const [myTrees, setMyTrees] = useState([]); // 🌱 Árboles de Enzo
   const [loading, setLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-  // 🔹 Fetch all events from the backend
+  // 🔹 Obtener todos los eventos desde MongoDB
   const fetchEvents = async () => {
     try {
       const res = await fetch('/api/events');
       const data = await res.json();
-      setEvents(data);
+
+      if (Array.isArray(data)) {
+        setPlants(data);
+
+        // 🔍 Filtrar solo árboles plantados por Enzo Valentino
+        const userTrees = data.filter(
+          (event) => event.organizerName?.toLowerCase() === 'enzo valentino'
+        );
+        setMyTrees(userTrees);
+      }
     } catch (error) {
-      console.error('Error fetching events:', error);
+      console.error('❌ Error fetching events:', error);
     }
   };
 
-  // 🔹 Load events when the component mounts
   useEffect(() => {
     fetchEvents();
   }, []);
 
-  // 🔹 Handle event creation (when clicking the button)
-  const handleCreateEvent = async () => {
+  // 🔹 Manejar nuevo árbol desde el modal
+  const handleAddTree = async (formData) => {
     setLoading(true);
     try {
       const randomImages = [
-        'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1445820135715-50c1e1b561fb?w=800&h=600&fit=crop',
+        'https://images.unsplash.com/photo-1578011166201-83d553ed495f?auto=format&fit=crop&q=80&w=627',
+        'https://images.unsplash.com/photo-1566114912475-c04353a8eab1?auto=format&fit=crop&q=80&w=687',
+        'https://images.unsplash.com/photo-1603352910231-534f880418e3?auto=format&fit=crop&q=80&w=687',
+        'https://plus.unsplash.com/premium_photo-1680018259460-e679784869c3?auto=format&fit=crop&q=80&w=687',
       ];
-      const imageUrl = randomImages[Math.floor(Math.random() * randomImages.length)];
+      const imageUrl =
+        randomImages[Math.floor(Math.random() * randomImages.length)];
 
       const res = await fetch('/api/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: 'New Tree Planted 🌱',
-          description: 'A community member just planted a new tree!',
-          location: 'Lisboa, Portugal',
+          title: formData.species, // 🌳 Usamos el tipo de árbol como título
+          description: `Plantado em ${formData.location}`,
+          location: formData.location,
           date: new Date(),
           imageUrl,
+          icon: '🌱',
+          liked: false,
+          organizerName: 'Enzo Valentino',
         }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert(data.message || 'Event created successfully!');
-        await fetchEvents(); // 🔄 Refresh event list dynamically
+        await fetchEvents();
+        setShowForm(false);
       } else {
-        alert(data.message || 'Error creating event.');
+        alert(data.message || 'Erro ao adicionar árvore.');
       }
     } catch (error) {
-      console.error('Error creating event:', error);
-      alert('Error creating the event.');
+      console.error('❌ Error adding tree:', error);
+      alert('Erro ao adicionar árvore.');
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔹 Static “Today” activity (just for UI)
-  const todayActivity = [
-    {
-      id: 1,
-      icon: '🌲',
-      name: 'Richard',
-      action: 'planted evergreen tree',
-      time: '2:38pm',
-      liked: false,
-    },
-    {
-      id: 2,
-      icon: '🌿',
-      name: 'Emily',
-      action: 'planted tanabata tree',
-      time: '5:47pm',
-      liked: false,
-    },
-  ];
+  // 🔹 Alternar "me gusta"
+  const toggleLike = (id) => {
+    setPlants((prev) =>
+      prev.map((p) => (p._id === id ? { ...p, liked: !p.liked } : p))
+    );
+  };
+
+  // 🔹 Actividad reciente
+  const todayActivity = plants.slice(0, 5).map((event) => ({
+    id: event._id,
+    icon: event.icon || '🌿',
+    name: event.organizerName || 'Verde Lab',
+    action: `planted ${event.title}`,
+    time: new Date(event.date).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+  }));
 
   return (
-    <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen">
+    <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen pb-24 relative">
       {/* ===== HEADER ===== */}
-      <div className="bg-white px-6 pt-6 pb-4 rounded-b-3xl shadow-sm">
+      <div className="relative px-6 pt-6 pb-4 rounded-b-3xl shadow-sm bg-white">
         <div className="flex items-center justify-between mb-4">
-          <div className="w-12 h-12 bg-green-200 rounded-2xl flex items-center justify-center shadow-md overflow-hidden">
-            <img
-              src="/logo.png"
-              alt="Tree Icon"
-              className="w-12 h-12 object-contain"
-            />
-          </div>
           <div className="mb-4">
-            <p className="text-sm text-gray-600">How are you Enzo,</p>
+            <p className="text-sm text-gray-600">Bem vindo Enzo,</p>
             <h1 className="text-3xl font-bold text-gray-900">
-              Help us save the earth
+              Ajude-nos a salvar a terra
             </h1>
           </div>
+
+          {/* Ícone de Perfil */}
+          <a
+            href="/profile"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
+          >
+            <User className="w-5 h-5" strokeWidth={2} />
+          </a>
         </div>
 
-        {/* ===== TABS ===== */}
-        <div className="flex gap-2">
-          {['Activity', 'Statistics', 'My plants'].map((tab) => (
+        {/* Tabs */}
+        <div className="flex gap-10 justify-center">
+          {['Activity', 'My plants'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
@@ -120,114 +136,135 @@ export default function TreePlantingApp() {
         </div>
       </div>
 
-      {/* ===== LATEST EVENTS SECTION ===== */}
+      {/* ===== PLANTAS (Activity) ===== */}
       <div className="px-6 mt-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-            Latest Events
-          </h2>
-
-          {/* View Mode Switcher (Grid/List) */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors ${viewMode === 'grid'
-                  ? 'bg-green-100 text-green-600'
-                  : 'text-gray-400 hover:bg-gray-100'
-                }`}
-            >
-              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="0" y="0" width="6" height="6" rx="1" />
-                <rect x="10" y="0" width="6" height="6" rx="1" />
-                <rect x="0" y="10" width="6" height="6" rx="1" />
-                <rect x="10" y="10" width="6" height="6" rx="1" />
-              </svg>
-            </button>
-
-            <button
-              onClick={() => setViewMode('list')}
-              className={`p-2 rounded-lg transition-colors ${viewMode === 'list'
-                  ? 'bg-green-100 text-green-600'
-                  : 'text-gray-400 hover:bg-gray-100'
-                }`}
-            >
-              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="0" y="2" width="16" height="2" rx="1" />
-                <rect x="0" y="7" width="16" height="2" rx="1" />
-                <rect x="0" y="12" width="16" height="2" rx="1" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* ===== PLANT CARDS (EVENTS) ===== */}
-        <div className="h-96 overflow-y-auto hide-scrollbar">
-          {events.length > 0 ? (
-            <PlantCardGrid recentPlants={events} viewMode={viewMode} />
-          ) : (
-            <p className="text-gray-500 text-sm text-center mt-8">
-              No events yet. 🌿 Be the first to plant a tree!
-            </p>
-          )}
-        </div>
-
-        {/* ===== TODAY SECTION ===== */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-              Today
-            </h2>
-            <button className="text-xs font-medium text-green-600 hover:text-green-700">
-              SEE ALL
-            </button>
-          </div>
-
-          <div className="space-y-3">
-            {todayActivity.map((activity) => (
-              <div
-                key={activity.id}
-                className="bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-xl">
-                    {activity.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-900">
-                      <span className="font-semibold">{activity.name}</span>{' '}
-                      {activity.action}
-                    </p>
-                    <p className="text-xs text-green-600 flex items-center gap-1 mt-0.5">
-                      <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
-                      {activity.time}
-                    </p>
-                  </div>
-                </div>
-                <button className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors">
+        {activeTab === 'activity' && (
+          <>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                Últimos Eventos
+              </h2>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'grid'
+                      ? 'bg-green-100 text-green-600'
+                      : 'text-gray-400 hover:bg-gray-100'
+                    }`}
+                >
                   <svg
                     className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#9ca3af"
-                    strokeWidth="2"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
                   >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    <rect x="0" y="0" width="6" height="6" rx="1" />
+                    <rect x="10" y="0" width="6" height="6" rx="1" />
+                    <rect x="0" y="10" width="6" height="6" rx="1" />
+                    <rect x="10" y="10" width="6" height="6" rx="1" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'list'
+                      ? 'bg-green-100 text-green-600'
+                      : 'text-gray-400 hover:bg-gray-100'
+                    }`}
+                >
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <rect x="0" y="2" width="16" height="2" rx="1" />
+                    <rect x="0" y="7" width="16" height="2" rx="1" />
+                    <rect x="0" y="12" width="16" height="2" rx="1" />
                   </svg>
                 </button>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {/* ===== CTA BUTTON ===== */}
-        <button
-          onClick={handleCreateEvent}
-          disabled={loading}
-          className={`w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:from-green-600 hover:to-green-700 mb-4 ${loading ? 'opacity-70 cursor-not-allowed' : ''
-            }`}
-        >
-          {loading ? 'Planting...' : 'Plant your first tree'}
-        </button>
+            <div className="h-96 overflow-y-auto hide-scrollbar">
+              {plants.length > 0 ? (
+                <PlantCardGrid
+                  recentPlants={plants.map((p) => ({
+                    id: p._id,
+                    image: p.imageUrl,
+                    name: p.organizerName || 'Verde Lab',
+                    tree: p.title,
+                    time: new Date(p.date).toLocaleDateString(),
+                    liked: p.liked,
+                  }))}
+                  viewMode={viewMode}
+                  toggleLike={toggleLike}
+                />
+              ) : (
+                <p className="text-gray-500 text-sm text-center mt-8">
+                  Nenhum evento ainda. 🌿 Seja o primeiro a plantar uma árvore!
+                </p>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* ===== MY PLANTS ===== */}
+        {activeTab === 'my plants' && (
+          <div className="h-96 overflow-y-auto hide-scrollbar">
+            {myTrees.length > 0 ? (
+              <PlantCardGrid
+                recentPlants={myTrees.map((p) => ({
+                  id: p._id,
+                  image: p.imageUrl,
+                  name: 'Enzo Valentino',
+                  tree: p.title, // ✅ Tipo de árvore plantado
+                  time: new Date(p.date).toLocaleDateString(),
+                  liked: p.liked,
+                }))}
+                viewMode={viewMode}
+                toggleLike={toggleLike}
+              />
+            ) : (
+              <p className="text-gray-500 text-sm text-center mt-8">
+                Ainda não plantaste nenhuma árvore. 🌳
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* ===== TODAY SECTION ===== */}
+        {activeTab === 'activity' && (
+          <div className="mb-6 mt-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                Hoje
+              </h2>
+            </div>
+
+            <div className="space-y-3">
+              {todayActivity.map((activity) => (
+                <div
+                  key={activity.id}
+                  className="bg-white rounded-2xl p-4 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-xl">
+                      {activity.icon}
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-900">
+                        <span className="font-semibold">{activity.name}</span>{' '}
+                        {activity.action}
+                      </p>
+                      <p className="text-xs text-green-600 flex items-center gap-1 mt-0.5">
+                        <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+                        {activity.time}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ===== FOOTER ===== */}
         <div className="text-center pb-6">
@@ -236,6 +273,26 @@ export default function TreePlantingApp() {
           </p>
         </div>
       </div>
+
+      {/* ===== POP-UP (MOBILE MODAL) ===== */}
+      {showForm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 p-4 transition-all">
+          <div className="relative bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-md shadow-2xl animate-slide-up">
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl"
+            >
+              ✕
+            </button>
+            <div className="p-6">
+              <AddTreeForm onAdd={handleAddTree} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== NAVBAR ===== */}
+      <Navbar onPlantClick={() => setShowForm(true)} />
     </div>
   );
 }
