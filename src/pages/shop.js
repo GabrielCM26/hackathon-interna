@@ -19,7 +19,7 @@ export default function EcoShop() {
       id: 1,
       name: 'Sementes de Girassol',
       category: 'seeds',
-      price: 25,
+      price: 2500,
       image: '🌻',
       description: 'Pacote com 20 sementes',
       inStock: true
@@ -28,7 +28,7 @@ export default function EcoShop() {
       id: 2,
       name: 'Kit de Compostagem',
       category: 'tools',
-      price: 150,
+      price: 4500,
       image: '♻️',
       description: 'Kit completo para compostagem caseira',
       inStock: true
@@ -37,7 +37,7 @@ export default function EcoShop() {
       id: 3,
       name: 'T-shirt Eco',
       category: 'apparel',
-      price: 200,
+      price: 20000,
       image: '👕',
       description: '100% algodão orgânico',
       inStock: true
@@ -46,7 +46,7 @@ export default function EcoShop() {
       id: 4,
       name: 'Garrafa Reutilizável',
       category: 'accessories',
-      price: 75,
+      price: 4500,
       image: '🧴',
       description: 'Aço inoxidável, 750ml',
       inStock: true
@@ -55,7 +55,7 @@ export default function EcoShop() {
       id: 5,
       name: 'Sementes de Tomate',
       category: 'seeds',
-      price: 30,
+      price: 3000,
       image: '🍅',
       description: 'Variedade orgânica',
       inStock: true
@@ -64,7 +64,7 @@ export default function EcoShop() {
       id: 6,
       name: 'Pá de Jardim',
       category: 'tools',
-      price: 85,
+      price: 5000,
       image: '🔨',
       description: 'Cabo de madeira sustentável',
       inStock: true
@@ -73,7 +73,7 @@ export default function EcoShop() {
       id: 7,
       name: 'Boné Eco',
       category: 'apparel',
-      price: 120,
+      price: 10000,
       image: '🧢',
       description: 'Material reciclado',
       inStock: false
@@ -82,7 +82,7 @@ export default function EcoShop() {
       id: 8,
       name: 'Sacola Reutilizável',
       category: 'accessories',
-      price: 40,
+      price: 15000,
       image: '👜',
       description: 'Tecido natural resistente',
       inStock: true
@@ -91,7 +91,7 @@ export default function EcoShop() {
       id: 9,
       name: 'Sementes de Manjericão',
       category: 'seeds',
-      price: 20,
+      price: 2000,
       image: '🌿',
       description: 'Perfeito para cozinha',
       inStock: true
@@ -100,27 +100,9 @@ export default function EcoShop() {
       id: 10,
       name: 'Regador Sustentável',
       category: 'tools',
-      price: 95,
+      price: 3500,
       image: '💧',
       description: 'Plástico reciclado',
-      inStock: true
-    },
-    {
-      id: 11,
-      name: 'Crachá de Embaixador',
-      category: 'accessories',
-      price: 180,
-      image: '🏅',
-      description: 'Distintivo especial',
-      inStock: true
-    },
-    {
-      id: 12,
-      name: 'Saco de Pinhões',
-      category: 'seeds',
-      price: 50,
-      image: '🌰',
-      description: '100g de pinhões para plantar',
       inStock: true
     }
   ];

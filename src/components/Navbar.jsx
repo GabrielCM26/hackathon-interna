@@ -25,7 +25,7 @@ export default function Navbar() {
         
           {/* Ranking */}
           <a
-            href="/dashboardtest"
+            href="/dashboard"
             className="flex flex-col items-center transition-all duration-300 hover:scale-110 hover:text-[#b6ceb4] p-2"
           >
             <Trophy className="w-6 h-6" strokeWidth={1.6} />
