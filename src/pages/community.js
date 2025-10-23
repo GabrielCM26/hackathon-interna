@@ -109,8 +109,8 @@ export default function TreePlantingApp() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 justify-center ">
-          {['Activity', 'Statistics', 'My plants'].map((tab) => (
+        <div className="flex gap-10 justify-center px- ">
+          {['Activity', 'My plants'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
@@ -179,7 +179,6 @@ export default function TreePlantingApp() {
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Today</h2>
-              <button className="text-xs font-medium text-green-600 hover:text-green-700">SEE ALL</button>
             </div>
 
             <div className="space-y-3">
