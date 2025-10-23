@@ -10,6 +10,24 @@ export default function Dashboard() {
     streak: 7,
   };
 
+<<<<<<< Updated upstream
+=======
+  const ranking = [
+    { name: "Leandrinho", xp: 2600, avatar: "", color: "bg-green-500" },
+    {
+      name: "Enzo Valentino",
+      xp: 2450,
+      avatar: "/profile.png",
+      color: "bg-emerald-600",
+      isCurrentUser: true,
+    },
+    { name: "Valentina Carneiro", xp: 2200, avatar: "👩", color: "bg-lime-500" },
+    { name: "Lucas Ferreira", xp: 1900, avatar: "👨‍🦱", color: "bg-teal-500" },
+    { name: "Ricardo Soares", xp: 1560, avatar: "👦", color: "bg-green-400" },
+    { name: "Luna Oliveira", xp: 1540, avatar: "👧", color: "bg-emerald-400" },
+  ];
+
+>>>>>>> Stashed changes
   const achievements = [
     { name: "Guardião da Floresta", xp: 300 },
     { name: "Semente de Ouro", xp: 150 },
