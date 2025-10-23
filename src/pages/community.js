@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PlantCardGrid from '../components/PlantCardGrid.jsx';
+import { User } from 'lucide-react';
 
 export default function TreePlantingApp() {
   const [activeTab, setActiveTab] = useState('activity');
@@ -90,26 +91,27 @@ export default function TreePlantingApp() {
     }
   };
 
-  return (
-    <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen">
-      {/* Header */}
-      <div className="bg-white px-6 pt-6 pb-4 rounded-b-3xl shadow-sm">
+return (
+ <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen pb-24">
+      {/* Header with white background */}
+      <div className="relative px-6 pt-6 pb-4 rounded-b-3xl shadow-sm bg-white">
         <div className="flex items-center justify-between mb-4">
-          <div className="w-12 h-12 bg-green-200 rounded-2xl flex items-center justify-center shadow-md overflow-hidden">
-            <img
-              src="/logo.png"
-              alt="Tree Icon"
-              className="w-12 h-12 object-contain"
-            />
-          </div>
           <div className="mb-4">
-            <p className="text-sm text-gray-600">How are you Enzo,</p>
-            <h1 className="text-3xl font-bold text-gray-900">Help us save the earth</h1>
+            <p className="text-sm text-gray-600">Bem vindo Enzo,</p>
+            <h1 className="text-3xl font-bold text-gray-900">Ajude-nos a salvar a terra</h1>
           </div>
+          
+          {/* Profile Icon */}
+          <a
+            href="/profile"
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
+          >
+            <User className="w-5 h-5" strokeWidth={2} />
+          </a>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-10 justify-center px- ">
+        <div className="flex gap-10 justify-center px-">
           {['Activity', 'My plants'].map((tab) => (
             <button
               key={tab}
@@ -178,7 +180,7 @@ export default function TreePlantingApp() {
         {activeTab === 'activity' && (
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Today</h2>
+              <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Hoje</h2>
             </div>
 
             <div className="space-y-3">
@@ -203,12 +205,7 @@ export default function TreePlantingApp() {
             </div>
           </div>
         )}
-
-        {/* CTA Button */}
-        <button className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:from-green-600 hover:to-green-700 mb-4">
-          Plant a tree
-        </button>
-
+        
         {/* Footer */}
         <div className="text-center pb-6">
           <p className="text-xs text-gray-500">
