@@ -87,19 +87,27 @@ export default function TreePlantingApp() {
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=400&h=300&fit=crop',
-      name: 'Anastasia',
-      tree: 'willow tree',
-      time: '1h ago',
-      liked: false
+      image: 'https://images.unsplash.com/photo-1607601595562-33f81c597a8f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735',
+      name: 'Stacy',
+      tree: 'maple tree',
+      time: '3h ago',
+      liked: true
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1634978158966-ef87e229adaa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
       name: 'Morgan',
       tree: 'oak tree',
       time: '3h ago',
       liked: true
+    },
+    {
+      id: 4,
+      image: 'https://images.unsplash.com/photo-1606596597449-d0dcccbba517?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2lsbG93JTIwdHJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500',
+      name: 'Anastasia',
+      tree: 'willow tree',
+      time: '1h ago',
+      liked: false
     }
   ]);
 
@@ -107,7 +115,7 @@ export default function TreePlantingApp() {
   const [myPlants, setMyPlants] = useState([
     {
       id: 101,
-      image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1602165426016-3b5eb1787655?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735',
       name: 'Your Plant 1',
       tree: 'Maple tree',
       time: 'Yesterday',
@@ -115,7 +123,7 @@ export default function TreePlantingApp() {
     },
     {
       id: 102,
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1572990479313-f2403a39dc63?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
       name: 'Your Plant 2',
       tree: 'Pine tree',
       time: '2 days ago',
@@ -198,8 +206,8 @@ export default function TreePlantingApp() {
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === tab.toLowerCase()
-                  ? 'bg-green-500 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                ? 'bg-green-500 text-white shadow-md'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
             >
               {tab}
