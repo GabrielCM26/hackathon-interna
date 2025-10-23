@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Leaf, ShoppingBag, Coins, Heart, Package, Sprout, TreePine, Shirt } from 'lucide-react';
+import { products } from '@/constants/products';
 
 export default function EcoShop() {
   const [userCoins, setUserCoins] = useState(5);
@@ -14,116 +15,9 @@ export default function EcoShop() {
     { id: 'tools', name: 'Ferramentas', icon: Package }
   ];
 
-  const products = [
-    {
-      id: 1,
-      name: 'Sementes de Girassol',
-      category: 'seeds',
-      price: 25,
-      image: '🌻',
-      description: 'Pacote com 20 sementes',
-      inStock: true
-    },
-    {
-      id: 2,
-      name: 'Kit de Compostagem',
-      category: 'tools',
-      price: 150,
-      image: '♻️',
-      description: 'Kit completo para compostagem caseira',
-      inStock: true
-    },
-    {
-      id: 3,
-      name: 'T-shirt Eco',
-      category: 'apparel',
-      price: 200,
-      image: '👕',
-      description: '100% algodão orgânico',
-      inStock: true
-    },
-    {
-      id: 4,
-      name: 'Garrafa Reutilizável',
-      category: 'accessories',
-      price: 75,
-      image: '🧴',
-      description: 'Aço inoxidável, 750ml',
-      inStock: true
-    },
-    {
-      id: 5,
-      name: 'Sementes de Tomate',
-      category: 'seeds',
-      price: 30,
-      image: '🍅',
-      description: 'Variedade orgânica',
-      inStock: true
-    },
-    {
-      id: 6,
-      name: 'Pá de Jardim',
-      category: 'tools',
-      price: 85,
-      image: '🔨',
-      description: 'Cabo de madeira sustentável',
-      inStock: true
-    },
-    {
-      id: 7,
-      name: 'Boné Eco',
-      category: 'apparel',
-      price: 120,
-      image: '🧢',
-      description: 'Material reciclado',
-      inStock: false
-    },
-    {
-      id: 8,
-      name: 'Sacola Reutilizável',
-      category: 'accessories',
-      price: 40,
-      image: '👜',
-      description: 'Tecido natural resistente',
-      inStock: true
-    },
-    {
-      id: 9,
-      name: 'Sementes de Manjericão',
-      category: 'seeds',
-      price: 20,
-      image: '🌿',
-      description: 'Perfeito para cozinha',
-      inStock: true
-    },
-    {
-      id: 10,
-      name: 'Regador Sustentável',
-      category: 'tools',
-      price: 95,
-      image: '💧',
-      description: 'Plástico reciclado',
-      inStock: true
-    },
-    {
-      id: 11,
-      name: 'Crachá de Embaixador',
-      category: 'accessories',
-      price: 180,
-      image: '🏅',
-      description: 'Distintivo especial',
-      inStock: true
-    },
-    {
-      id: 12,
-      name: 'Saco de Pinhões',
-      category: 'seeds',
-      price: 50,
-      image: '🌰',
-      description: '100g de pinhões para plantar',
-      inStock: true
-    }
-  ];
+  <div>
+   <products/>
+  </div>
 
   const filteredProducts = activeCategory === 'all' 
     ? products 
