@@ -7,8 +7,9 @@ export const metadata = {
 export default function Home() {
   return (
     <div className="w-full min-h-screen flex justify-center bg-gray-900">
-      <div className="w-full max-w-md h-screen bg-no-repeat bg-cover bg-top overflow-hidden"
-        style={{ backgroundImage: "url('/landingpage.jpg')" }}
+      <div
+        className="w-full max-w-md h-screen bg-no-repeat bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: "url('/homepage.png')" }}
       >
         <div className="flex flex-col justify-between w-full h-full p-6 text-white">
           <main className="flex-1"></main>

@@ -1,19 +1,30 @@
 import Link from "next/link";
 import React from "react";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from "next/navigation";
 import { Home, Trophy, Store, User } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({ onPlantClick }) {
+  const pathname = usePathname();
+  const router = useRouter();
 
-   const pathname = usePathname();
-
-     if (pathname === '/') {
+  // Oculta a navbar na landing page
+  if (pathname === "/") {
     return null;
   }
 
+  const handlePlantClick = () => {
+    if (pathname === "/community") {
+      // Se já estiver na página community → apenas abre o modal
+      onPlantClick?.();
+    } else {
+      // Se estiver em outra página → vai pra community e adiciona ?plant=true
+      router.push("/community?plant=true");
+    }
+  };
+
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-black text-white py-2 shadow-[0_-2px_10px_rgba(0,0,0,0.6)] z-50">
-      <div className="max-w-md mx-auto">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-[#594336] text-white py-2 shadow-[0_-2px_10px_rgba(0,0,0,0.6)] z-50">
+  <div className="px-4">
         <ul className="flex justify-around items-center text-center text-xs relative">
           {/* Início */}
           <a
@@ -22,7 +33,7 @@ export default function Navbar() {
           >
             <Home className="w-6 h-6" strokeWidth={1.6} />
           </a>
-        
+
           {/* Ranking */}
           <a
             href="/dashboard"
@@ -31,22 +42,15 @@ export default function Navbar() {
             <Trophy className="w-6 h-6" strokeWidth={1.6} />
           </a>
 
-          {/* Botão central - Plantar árvore */}
+          {/* 🌱 Botão central */}
           <div className="relative -translate-y-6">
-            <Link
-              href="/add-tree"
+            <button
+              onClick={handlePlantClick}
               aria-label="Plantar árvore"
-              className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#c8d8c2] text-black shadow-[0_8px_20px_rgba(182,206,180,0.45)] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
+              className="group relative flex h-16 w-16 items-center justify-center rounded-full bg-[#c8d8c2] text-black shadow-[0_12px_30px_rgba(182,206,180,0.45)] transition-all duration-300 hover:scale-110 hover:-translate-y-1"
             >
-              <span className="text-2xl">🌱</span>
-              <span className="pointer-events-none absolute -bottom-6 whitespace-nowrap rounded-full bg-[#d9e9cf] px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#594236] shadow-md">
-                Plantar
-              </span>
-              <span
-                className="absolute inset-0 rounded-full bg-[#b6ceb4]/0 transition group-hover:bg-[#b6ceb4]/20"
-                aria-hidden="true"
-              />
-            </Link>
+              <span className="text-3xl">🌱</span>
+            </button>
           </div>
 
           {/* Shop */}

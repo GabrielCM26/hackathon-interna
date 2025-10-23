@@ -13,14 +13,11 @@ app.use(cors());
 app.use(express.json());
 
 // ======== API ROUTES ========
-
-// Árvores
 app.use('/api/trees', require('./routes/trees'));
-
-// Doações
 app.use('/api/donations', require('./routes/donations'));
+app.use('/api/events', require('./routes/events')); // 🔥 NÃO ESQUECER!
 
-// Health check da API
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
@@ -30,9 +27,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // ======== NEXT.JS HANDLING ========
-app.use((req, res, next) => {
-  return handle(req, res);
-});
+app.use((req, res) => handle(req, res)); // ✅ Sem 'next' aqui
 
 const PORT = process.env.PORT || 3000;
 
