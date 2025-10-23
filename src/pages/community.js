@@ -3,19 +3,25 @@ import { Heart, User } from 'lucide-react';
 
 // Plant Card Component
 function PlantCard({ plant, viewMode, toggleLike, type }) {
+  // Determine subtitle based on type
+  const subtitle =
+    type === 'my'
+      ? `Planted ${plant.tree}` // My plants
+      : plant.event || plant.tree; // Activity or favorites
+
   if (viewMode === 'list') {
     return (
       <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-3">
         <div className="flex gap-3 p-3">
           <img
             src={plant.image}
-            alt={plant.tree}
+            alt={plant.tree || plant.event}
             className="w-24 h-24 object-cover rounded-xl"
           />
           <div className="flex-1 flex flex-col justify-between">
             <div>
               <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
-              <p className="text-xs text-gray-600 capitalize">Planted {plant.tree}</p>
+              <p className="text-xs text-gray-600 capitalize">{subtitle}</p>
             </div>
             <div className="flex items-center justify-between">
               <p className="text-xs text-green-600 flex items-center gap-1">
@@ -28,7 +34,7 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
               >
                 <Heart
                   size={18}
-                  fill={plant.liked ? "currentColor" : "none"}
+                  fill={plant.liked ? 'currentColor' : 'none'}
                   strokeWidth={2}
                 />
               </button>
@@ -44,7 +50,7 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
       <div className="relative">
         <img
           src={plant.image}
-          alt={plant.tree}
+          alt={plant.tree || plant.event}
           className="w-full h-40 object-cover"
         />
         <button
@@ -54,14 +60,14 @@ function PlantCard({ plant, viewMode, toggleLike, type }) {
           <Heart
             size={20}
             className="text-red-500"
-            fill={plant.liked ? "currentColor" : "none"}
+            fill={plant.liked ? 'currentColor' : 'none'}
             strokeWidth={2}
           />
         </button>
       </div>
       <div className="p-3">
         <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
-        <p className="text-xs text-gray-600 capitalize mb-2">Planted {plant.tree}</p>
+        <p className="text-xs text-gray-600 capitalize mb-2">{subtitle}</p>
         <p className="text-xs text-green-600 flex items-center gap-1">
           <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
           {plant.time}
@@ -79,36 +85,28 @@ export default function TreePlantingApp() {
   const [plants, setPlants] = useState([
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=300&fit=crop',
-      name: 'James',
-      tree: 'evergreen tree',
+      image: 'https://plus.unsplash.com/premium_photo-1681064887741-3da2fd0c5896?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170',
+      name: 'Stacy',
+      event: 'Cleaning the forest',
       time: '6 mins ago',
       liked: true
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1607601595562-33f81c597a8f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735',
-      name: 'Stacy',
-      tree: 'maple tree',
+      image: 'https://circularecology.com/wp-content/uploads/2024/12/20210621_kenya-Lamu_0660-copy-scaled.jpg.webp',
+      name: 'James',
+      event: 'Planting 100 trees',
       time: '3h ago',
       liked: true
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1634978158966-ef87e229adaa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
+      image: 'https://www.fruitrescue.org/uploads/1/4/2/1/142131450/4march2023-treecareworkshop-hill-10_orig.jpg',
       name: 'Morgan',
-      tree: 'oak tree',
+      event: 'Tree care workshop',
       time: '3h ago',
       liked: true
     },
-    {
-      id: 4,
-      image: 'https://images.unsplash.com/photo-1606596597449-d0dcccbba517?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2lsbG93JTIwdHJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=500',
-      name: 'Anastasia',
-      tree: 'willow tree',
-      time: '1h ago',
-      liked: false
-    }
   ]);
 
   // My plants
@@ -116,7 +114,7 @@ export default function TreePlantingApp() {
     {
       id: 101,
       image: 'https://images.unsplash.com/photo-1602165426016-3b5eb1787655?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735',
-      name: 'Your Plant 1',
+      name: 'My plant 1',
       tree: 'Maple tree',
       time: 'Yesterday',
       liked: false
@@ -124,7 +122,7 @@ export default function TreePlantingApp() {
     {
       id: 102,
       image: 'https://images.unsplash.com/photo-1572990479313-f2403a39dc63?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687',
-      name: 'Your Plant 2',
+      name: 'My plant 2',
       tree: 'Pine tree',
       time: '2 days ago',
       liked: true
