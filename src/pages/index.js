@@ -1,32 +1,53 @@
-import Link from 'next/link';
+import React from 'react';
+import { Sprout } from 'lucide-react';
 
-export const metadata = {
-  hideNavbar: true
-};
-
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className="w-full min-h-screen flex justify-center bg-gray-900">
       <div
-        className="w-full max-w-md h-screen bg-no-repeat bg-cover bg-center overflow-hidden"
-        style={{ backgroundImage: "url('/homepage.png')" }}
+        className="w-full max-w-md h-screen bg-no-repeat bg-cover bg-center relative overflow-hidden"
+        style={{ backgroundImage: "url('/pa.png')" }}
       >
-        <div className="flex flex-col justify-between w-full h-full p-6 text-white">
-          <main className="flex-1"></main>
+        {/* Overlay escuro */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        <div className="relative flex flex-col justify-between w-full h-full p-8 text-white">
+          {/* Espaço vazio no topo */}
+          <div className="flex-1"></div>
 
-          <div className="text-center space-y-8 mb-8">
-            <h1 className="font-serif text-3xl font-extrabold tracking-tight">
-              Plant a tree <span className="font-serif text-3xl font-extrabold tracking-tight text-emerald-600">&</span><br />
-              <span>save our planet</span>
-            </h1>
+          {/* Conteúdo */}
+          <div className="space-y-6 mb-12">
+            <div className="text-center space-y-4">
+              <div className="flex justify-center mb-6">
+                <Sprout style={{ color: '#76db03' }} size={48} />
+              </div>
+              
+              <h1 className="text-4xl font-bold leading-tight">
+                Planta hoje
+                <span className="block mt-2" style={{ color: '#76db03' }}>
+                  Muda o amanha!
+                </span>
+              </h1>
+              
+              <p className="text-white/70 text-base">
+                Cada árvore faz diferença
+              </p>
+            </div>
 
-            <Link href="/community" passHref>
+            {/* Botão */}
+            <a href="/community">
               <button
-                className="font-serif w-fit mx-auto px-6 py-4 flex justify-center text-sm rounded-2xl bg-emerald-600 opacity-95 text-white
-               font-semibold shadow-lg active:scale-95 transform transition mb-5 cursor-pointer">
-                Plant a tree
+                className="w-full text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-95"
+                style={{
+                  backgroundColor: '#76db03',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = '#6ac002')}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = '#76db03')}
+              >
+                Quero fazer a diferença
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

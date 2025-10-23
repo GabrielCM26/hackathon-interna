@@ -158,7 +158,7 @@ export default function Community() {
       <div className="relative px-6 pt-6 pb-4 rounded-b-3xl shadow-sm bg-white">
         <div className="flex items-center justify-between mb-4">
           <div className="mb-4">
-            <p className="text-sm text-gray-600">Bem vindo Enzo,</p>
+            <p className="text-sm text-gray-600">Bem vindo <span className="text-green-600 font-bold">Enzo,</span></p>
             <h1 className="text-3xl font-bold text-gray-900">
               Ajude-nos a salvar a terra
             </h1>
@@ -178,7 +178,7 @@ export default function Community() {
               className="flex items-center justify-center w-12 h-12 rounded-full overflow-hidden hover:ring-2 hover:ring-green-500 transition-all"
             >
               <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"
+                src="/profile.png"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />

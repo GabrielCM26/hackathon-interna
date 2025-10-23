@@ -72,11 +72,7 @@ export default function Dashboard() {
             href="/profile"
             className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden hover:ring-2 hover:ring-green-500 transition-all"
           >
-            <img
-              src="/profile.png"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
+           
           </a>
         </div>
 

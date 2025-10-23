@@ -1,180 +1,172 @@
-import React from 'react';
+  import React from 'react';
+  import { ArrowLeft, Users, Shield, Award, Target, Heart, Leaf } from 'lucide-react';
 
-export default function AboutUs() {
-  const team = [
-    {
-      name: "Ana Silva",
-      role: "CEO, Director",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-    },
-    {
-      name: "João Costa",
-      role: "Impact Director",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Maria Santos",
-      role: "Tech Lead",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
-    },
-    {
-      name: "Pedro Oliveira",
-      role: "Community Manager",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
-    }
-  ];
+  export default function AboutUs() {
+    const team = [
+      {
+        name: "Paula Guollo",
+        role: "CEO & Fundadora",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
+      },
+      {
+        name: "Miguel Sabogal ",
+        role: "Diretor de Impacto",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+      },
+      {
+        name: "Gabriel",
+        role: "Tech Lead",
+        image: "https://i.pinimg.com/736x/eb/ce/d0/ebced0e4efc36fe9ffa19dcd3ed810bd.jpg"
+      },
+      {
+        name: "Guilherme França",
+        role: "Community Manager",
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
+      }
+    ];
 
-  return (
-    <div className="w-full min-h-screen flex justify-center bg-gray-900">
-      <div className="w-full max-w-md min-h-screen bg-[#f0f0f0] pb-24">
+    const values = [
+      {
+        icon: Shield,
+        title: "Transparência Total",
+        description: "Cada doação é rastreável. Você sabe exatamente onde sua árvore foi plantada.",
+        color: "from-blue-500 to-blue-600"
+      },
+      {
+        icon: Award,
+        title: "Impacto Verificado",
+        description: "Parceria com ONGs locais para garantir que cada árvore sobreviva e cresça.",
+        color: "from-green-500 to-emerald-600"
+      },
+      {
+        icon: Users,
+        title: "Comunidade Ativa",
+        description: "Mais de 342 eco-heróis plantando árvores e mudando o mundo juntos.",
+        color: "from-purple-500 to-pink-600"
+      }
+    ];
+
+    return (
+      <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen pb-24">
         {/* Hero Section */}
         <div 
-          className="relative h-56 bg-cover bg-center"
+          className="relative h-64 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&h=600&fit=crop')",
+            backgroundImage: "url('/about.png')",
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
-          <div className="relative h-full flex items-center justify-center">
-            <h1 className="text-4xl font-bold text-white">About us</h1>
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-500/50"></div>
+          
+          <div className="relative h-full flex flex-col justify-between p-6">
+            <a
+              href="/community"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-all self-start"
+            >
+              <ArrowLeft className="w-5 h-5 text-white" />
+            </a>
+            
+            <div>
+              <h1 className="text-4xl font-bold text-white mb-2">Sobre Nós</h1>
+              <p className="text-white/90 text-sm">Plantando o futuro, uma árvore de cada vez</p>
+            </div>
           </div>
         </div>
 
-        {/* About Section */}
         <div className="px-6 py-8">
-          <div className="text-center mb-8">
-            <p className="text-[#96a78d] text-xs uppercase tracking-wider mb-2">⚫ ABOUT US ⚫</p>
-            <h2 className="text-2xl font-bold text-[#594236]">
-              <span className="text-[#b6ceb4]">Introduction</span> To Best<br />
-              Sustainable Platform!
-            </h2>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="space-y-4 mb-8">
-            <div className="bg-white rounded-2xl p-4 shadow-md flex items-start gap-4">
-              <div className="w-12 h-12 bg-[#d9e9cf] rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-xl">💰</span>
+          {/* Mission Statement */}
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-6 mb-6 text-white shadow-lg">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <Target className="w-6 h-6" />
               </div>
-              <div>
-                <h3 className="font-semibold text-[#594236] text-sm mb-1">Best Price Guaranteed</h3>
-                <p className="text-xs text-[#96a78d]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
+              <h2 className="text-xl font-bold">Nossa Missão</h2>
             </div>
-
-            <div className="bg-white rounded-2xl p-4 shadow-md flex items-start gap-4">
-              <div className="w-12 h-12 bg-[#d9e9cf] rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-xl">🔧</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#594236] text-sm mb-1">Transparency</h3>
-                <p className="text-xs text-[#96a78d]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-4 shadow-md flex items-start gap-4">
-              <div className="w-12 h-12 bg-[#d9e9cf] rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-xl">👥</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-[#594236] text-sm mb-1">Professional Team</h3>
-                <p className="text-xs text-[#96a78d]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="space-y-3 text-xs text-[#96a78d] mb-8">
-            <p>
-              Harum quisquam amet debitis pariatur quis? Nemo excepturi duis 
-              nohon nostrud officia dolorem fugit itaque, fugiat excepturi modi, porta.
-            </p>
-            <p>
-              Odio velit, odit, est, euismod aliquid luctus pharetra vera, 
-              condimentum, nostrum mi venenatis, mollit odio mi, unde 
-              semper adipiscing sui.
+            <p className="text-white/90 leading-relaxed">
+              Tornar a reflorestação acessível e gamificada, criando uma comunidade global de eco-heróis comprometidos em restaurar o planeta através da plantação de árvores.
             </p>
           </div>
 
-          {/* Images Grid */}
-          <div className="grid grid-cols-2 gap-3 mb-8">
-            <div className="rounded-2xl overflow-hidden shadow-md h-32">
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop"
-                alt="Team working"
-                className="w-full h-full object-cover"
-              />
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+              <div className="text-3xl font-bold text-green-600 mb-1">1.2K+</div>
+              <p className="text-xs text-gray-600">Árvores Plantadas</p>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-md h-32 relative">
-              <img 
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop"
-                alt="Team meeting"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                <div className="w-12 h-12 bg-[#b6ceb4] rounded-full flex items-center justify-center">
-                  <span className="text-white text-xl">▶</span>
-                </div>
-              </div>
+            <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+              <div className="text-3xl font-bold text-blue-600 mb-1">342</div>
+              <p className="text-xs text-gray-600">Eco-Heróis</p>
+            </div>
+            <div className="bg-white rounded-2xl p-4 text-center shadow-sm">
+              <div className="text-3xl font-bold text-purple-600 mb-1">12</div>
+              <p className="text-xs text-gray-600">Países</p>
+            </div>
+          </div>
+
+          {/* Values */}
+          <div className="mb-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Nossos Valores</h3>
+            <div className="space-y-4">
+              {values.map((value, index) => {
+                const Icon = value.icon;
+                return (
+                  <div key={index} className="bg-white rounded-2xl p-5 shadow-sm">
+                    <div className="flex items-start gap-4">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${value.color} rounded-full flex items-center justify-center flex-shrink-0`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 mb-1">{value.title}</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">{value.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* UN SDG Goals */}
-          <div className="bg-white rounded-2xl p-6 mb-8 shadow-md">
+          <div className="bg-white rounded-2xl p-6 mb-8 shadow-sm">
             <div className="text-center mb-4">
-              <h3 className="text-lg font-bold text-[#594236] mb-1">UN SDGs Commitment</h3>
-              <p className="text-xs text-[#96a78d]">Aligned with Sustainable Development Goals</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Leaf className="w-5 h-5 text-green-600" />
+                <h3 className="text-lg font-bold text-gray-900">Objetivos da ONU</h3>
+              </div>
+              <p className="text-sm text-gray-600">Alinhados com os ODS da ONU</p>
             </div>
-            <div className="flex justify-center">
-              <img 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='80'%3E%3Crect width='98' height='80' fill='%23E5883E'/%3E%3Crect x='101' width='98' height='80' fill='%23417F4F'/%3E%3Crect x='202' width='98' height='80' fill='%2356C02B'/%3E%3Ctext x='20' y='30' font-family='Arial' font-size='20' font-weight='bold' fill='white'%3E11%3C/text%3E%3Ctext x='10' y='50' font-family='Arial' font-size='8' fill='white'%3ESUSTAINABLE%3C/text%3E%3Ctext x='20' y='60' font-family='Arial' font-size='8' fill='white'%3ECITIES%3C/text%3E%3Ctext x='121' y='30' font-family='Arial' font-size='20' font-weight='bold' fill='white'%3E13%3C/text%3E%3Ctext x='115' y='50' font-family='Arial' font-size='8' fill='white'%3ECLIMATE%3C/text%3E%3Ctext x='115' y='60' font-family='Arial' font-size='8' fill='white'%3EACTION%3C/text%3E%3Ctext x='222' y='30' font-family='Arial' font-size='20' font-weight='bold' fill='white'%3E15%3C/text%3E%3Ctext x='227' y='50' font-family='Arial' font-size='8' fill='white'%3ELIFE%3C/text%3E%3Ctext x='215' y='60' font-family='Arial' font-size='8' fill='white'%3EON LAND%3C/text%3E%3C/svg%3E"
-                alt="UN SDG Goals"
-                className="w-full max-w-xs h-auto rounded-xl"
-              />
+            
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-orange-500 rounded-xl p-4 text-white text-center">
+                <div className="text-2xl font-bold mb-1">11</div>
+                <div className="text-xs leading-tight">Cidades Sustentáveis</div>
+              </div>
+              <div className="bg-green-600 rounded-xl p-4 text-white text-center">
+                <div className="text-2xl font-bold mb-1">13</div>
+                <div className="text-xs leading-tight">Ação Climática</div>
+              </div>
+              <div className="bg-lime-500 rounded-xl p-4 text-white text-center">
+                <div className="text-2xl font-bold mb-1">15</div>
+                <div className="text-xs leading-tight">Vida Terrestre</div>
+              </div>
             </div>
           </div>
 
-          {/* Team Section */}
-          <div className="mb-8">
-            <div className="text-center mb-6">
-              <p className="text-[#96a78d] text-xs uppercase tracking-wider mb-2">⚫ OUR TEAM ⚫</p>
-              <h2 className="text-2xl font-bold text-[#594236]">
-                <span className="text-[#b6ceb4]">Team</span> Members
-              </h2>
-              <p className="text-xs text-[#96a78d] mt-2">
-                Sint nasactur facilis, delectus conubia consequuntur.
-              </p>
-            </div>
+        
 
-            <div className="grid grid-cols-2 gap-4">
-              {team.map((member, index) => (
-                <div key={index} className="group">
-                  <div className="bg-white rounded-2xl overflow-hidden shadow-md">
-                    <div className="relative h-40 overflow-hidden">
-                      <img 
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-4 text-center">
-                      <div className="bg-[#b6ceb4] text-white rounded-full inline-block px-4 py-2 -mt-8 mb-2 shadow-lg relative z-10">
-                        <h3 className="font-semibold text-xs">{member.name}</h3>
-                        <p className="text-[10px] opacity-90">{member.role}</p>
-                      </div>
-                      <div className="flex justify-center gap-2 mt-2">
-                        <button className="w-6 h-6 bg-[#f0f0f0] rounded-full flex items-center justify-center text-[10px]">f</button>
-                        <button className="w-6 h-6 bg-[#f0f0f0] rounded-full flex items-center justify-center text-[10px]">t</button>
-                        <button className="w-6 h-6 bg-[#f0f0f0] rounded-full flex items-center justify-center text-[10px]">in</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          {/* CTA */}
+          <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 text-white shadow-lg text-center">
+            <Heart className="w-12 h-12 mx-auto mb-3" />
+            <h3 className="text-xl font-bold mb-2">Junte-se a Nós</h3>
+            <p className="text-white/90 text-sm mb-4">
+              Faça parte desta comunidade e ajude a plantar o futuro
+            </p>
+            <a href="/community">
+              <button className="bg-white text-purple-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition-all">
+                Começar Agora
+              </button>
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
