@@ -5,7 +5,7 @@ export default function Profile() {
 
   const user = {
     name: "Enzo Valentino",
-    email: "enzo@example.com",
+    email: "enzo@valentino.com",
     coins: 5,
     streak: 7,
     trees: 18,
@@ -52,23 +52,27 @@ export default function Profile() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-white text-[#1f2937] flex flex-col items-center px-6 py-10 font-sans pb-24">
+    <main className="max-w-md mx-auto min-h-screen bg-gradient-to-b from-emerald-50 to-white text-[#1f2937] flex flex-col items-center px-6 py-10 font-sans pb-24">
       {/* Header */}
-      <header className="w-full max-w-2xl flex items-center justify-between mb-8">
+      <header className="w-full flex items-center justify-between mb-8">
         <h1 className="text-lg font-semibold text-[#14532d]">Meu Perfil</h1>
       </header>
 
       {/* Profile Card */}
-      <section className="w-full max-w-2xl bg-white rounded-3xl shadow-md p-6 flex flex-col items-center">
-        <div className="w-24 h-24 rounded-full bg-[#22c55e]/10 flex items-center justify-center text-4xl font-bold text-[#22c55e] mb-4">
-          {user.name.charAt(0).toUpperCase()}
-        </div>
+      <section className="w-full bg-white rounded-3xl shadow-md p-6 flex flex-col items-center">
+        <div className="w-24 h-24 rounded-full overflow-hidden bg-[#22c55e]/10 flex items-center justify-center mb-4">
+  <img
+    src="/profile.png"
+    alt="Foto de perfil"
+    className="w-full h-full object-cover rounded-full"
+  />
+</div>
         <h2 className="text-2xl font-semibold text-[#14532d]">{user.name}</h2>
         <p className="text-sm text-[#166534] mb-6">{user.email}</p>
       </section>
 
       {/* Stats */}
-      <section className="w-full max-w-2xl bg-white rounded-3xl mt-8 p-6 shadow-md grid grid-cols-3 gap-4 text-center">
+      <section className="w-full bg-white rounded-3xl mt-8 p-6 shadow-md grid grid-cols-3 gap-4 text-center">
         <div className="flex flex-col items-center gap-2">
           <span className="text-2xl">🔥</span>
           <p className="text-xs text-[#15803d] uppercase">Sequência</p>
@@ -87,7 +91,7 @@ export default function Profile() {
       </section>
 
       {/* Conquistas */}
-      <section className="w-full max-w-2xl bg-white rounded-3xl mt-8 p-6 shadow-md">
+      <section className="w-full bg-white rounded-3xl mt-8 p-6 shadow-md">
          <div className="mb-6">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Conquistas</h3>
           <div className="grid grid-cols-1 gap-3">
@@ -124,7 +128,7 @@ export default function Profile() {
       </section>
 
       {/* Actions */}
-      <section className="w-full max-w-2xl mt-8 flex flex-col gap-4">
+      <section className="w-full mt-8 flex flex-col gap-4">
         <button className="flex justify-between items-center bg-white rounded-2xl p-4 border border-[#bbf7d0] hover:border-[#86efac] transition">
           <div className="flex items-center gap-3">
             <span className="text-xl">👥</span>
@@ -140,4 +144,4 @@ export default function Profile() {
       </section>
     </main>
   );
-}
+} 
