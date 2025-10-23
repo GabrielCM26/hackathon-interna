@@ -1,8 +1,16 @@
 import Link from "next/link";
 import React from "react";
+import { usePathname } from 'next/navigation';
 import { Home, Trophy, Store, User } from "lucide-react";
 
 export default function Navbar() {
+
+   const pathname = usePathname();
+
+     if (pathname === '/') {
+    return null;
+  }
+
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-black text-white py-2 shadow-[0_-2px_10px_rgba(0,0,0,0.6)] z-50">
       <div className="max-w-md mx-auto">

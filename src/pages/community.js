@@ -1,6 +1,75 @@
 import React, { useState } from 'react';
-import PlantCardGrid from '../components/PlantCardGrid.jsx';
-import { User } from 'lucide-react';
+import { Heart, User } from 'lucide-react';
+
+// Plant Card Component
+function PlantCard({ plant, viewMode, toggleLike, type }) {
+  if (viewMode === 'list') {
+    return (
+      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-3">
+        <div className="flex gap-3 p-3">
+          <img
+            src={plant.image}
+            alt={plant.tree}
+            className="w-24 h-24 object-cover rounded-xl"
+          />
+          <div className="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
+              <p className="text-xs text-gray-600 capitalize">Planted {plant.tree}</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-green-600 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+                {plant.time}
+              </p>
+              <button
+                onClick={() => toggleLike(plant.id, type)}
+                className="text-red-500 hover:scale-110 transition-transform"
+              >
+                <Heart
+                  size={18}
+                  fill={plant.liked ? "currentColor" : "none"}
+                  strokeWidth={2}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="relative">
+        <img
+          src={plant.image}
+          alt={plant.tree}
+          className="w-full h-40 object-cover"
+        />
+        <button
+          onClick={() => toggleLike(plant.id, type)}
+          className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors"
+        >
+          <Heart
+            size={20}
+            className="text-red-500"
+            fill={plant.liked ? "currentColor" : "none"}
+            strokeWidth={2}
+          />
+        </button>
+      </div>
+      <div className="p-3">
+        <h3 className="font-semibold text-gray-900 text-sm">{plant.name}</h3>
+        <p className="text-xs text-gray-600 capitalize mb-2">Planted {plant.tree}</p>
+        <p className="text-xs text-green-600 flex items-center gap-1">
+          <span className="w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+          {plant.time}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function TreePlantingApp() {
   const [activeTab, setActiveTab] = useState('activity');
@@ -74,6 +143,12 @@ export default function TreePlantingApp() {
     }
   ];
 
+  // Get all favorite plants (combining from both arrays)
+  const getFavoritePlants = () => {
+    const allPlants = [...plants, ...myPlants];
+    return allPlants.filter(plant => plant.liked);
+  };
+
   // Toggle like for plants
   const toggleLike = (id, type = 'recent') => {
     if (type === 'recent') {
@@ -91,8 +166,10 @@ export default function TreePlantingApp() {
     }
   };
 
-return (
- <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen pb-24">
+  const favoritePlants = getFavoritePlants();
+
+  return (
+    <div className="max-w-md mx-auto bg-gradient-to-b from-emerald-50 to-white min-h-screen pb-24">
       {/* Header with white background */}
       <div className="relative px-6 pt-6 pb-4 rounded-b-3xl shadow-sm bg-white">
         <div className="flex items-center justify-between mb-4">
@@ -100,27 +177,30 @@ return (
             <p className="text-sm text-gray-600">Bem vindo Enzo,</p>
             <h1 className="text-3xl font-bold text-gray-900">Ajude-nos a salvar a terra</h1>
           </div>
-          
+
           {/* Profile Icon */}
           <a
             href="/profile"
-            className="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full overflow-hidden hover:ring-2 hover:ring-green-500 transition-all"
           >
-            <User className="w-5 h-5" strokeWidth={2} />
+            <img
+              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </a>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-10 justify-center px-">
-          {['Activity', 'My plants'].map((tab) => (
+        <div className="flex gap-3 justify-center">
+          {['Activity', 'Favorites', 'My plants'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                activeTab === tab.toLowerCase()
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeTab === tab.toLowerCase()
                   ? 'bg-green-500 text-white shadow-md'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -128,20 +208,22 @@ return (
         </div>
       </div>
 
-      {/* Latest Plants / My Plants Section */}
+      {/* Content Section */}
       <div className="px-6 mt-6">
+        {/* Latest Plants / Favorites / My Plants Section */}
         {activeTab !== 'statistics' && (
           <>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-                {activeTab === 'activity' ? 'Latest Events' : 'My Plants'}
+                {activeTab === 'activity' && 'Latest Events'}
+                {activeTab === 'favorites' && 'Favorites'}
+                {activeTab === 'my plants' && 'My Plants'}
               </h2>
               <div className="flex gap-2">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg transition-colors ${
-                    viewMode === 'grid' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:bg-gray-100'
-                  }`}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:bg-gray-100'
+                    }`}
                 >
                   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
                     <rect x="0" y="0" width="6" height="6" rx="1" />
@@ -152,9 +234,8 @@ return (
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg transition-colors ${
-                    viewMode === 'list' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:bg-gray-100'
-                  }`}
+                  className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-green-100 text-green-600' : 'text-gray-400 hover:bg-gray-100'
+                    }`}
                 >
                   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
                     <rect x="0" y="2" width="16" height="2" rx="1" />
@@ -166,19 +247,70 @@ return (
             </div>
 
             <div className="h-96 overflow-y-auto hide-scrollbar">
+              {/* Activity Tab */}
               {activeTab === 'activity' && (
-                <PlantCardGrid recentPlants={plants} viewMode={viewMode} toggleLike={(id) => toggleLike(id, 'recent')} />
+                <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
+                  {plants.map((plant) => (
+                    <PlantCard
+                      key={plant.id}
+                      plant={plant}
+                      viewMode={viewMode}
+                      toggleLike={toggleLike}
+                      type="recent"
+                    />
+                  ))}
+                </div>
               )}
+
+              {/* Favorites Tab */}
+              {activeTab === 'favorites' && (
+                <>
+                  {favoritePlants.length > 0 ? (
+                    <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
+                      {favoritePlants.map((plant) => {
+                        const type = plant.id > 100 ? 'my' : 'recent';
+                        return (
+                          <PlantCard
+                            key={plant.id}
+                            plant={plant}
+                            viewMode={viewMode}
+                            toggleLike={toggleLike}
+                            type={type}
+                          />
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <Heart size={48} className="text-gray-300 mb-3" />
+                      <h3 className="text-gray-600 font-semibold mb-1">No favorites yet</h3>
+                      <p className="text-sm text-gray-500">Start liking plants to see them here</p>
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* My Plants Tab */}
               {activeTab === 'my plants' && (
-                <PlantCardGrid recentPlants={myPlants} viewMode={viewMode} toggleLike={(id) => toggleLike(id, 'my')} />
+                <div className={viewMode === 'grid' ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
+                  {myPlants.map((plant) => (
+                    <PlantCard
+                      key={plant.id}
+                      plant={plant}
+                      viewMode={viewMode}
+                      toggleLike={toggleLike}
+                      type="my"
+                    />
+                  ))}
+                </div>
               )}
             </div>
           </>
         )}
 
-        {/* Today Section */}
+        {/* Today Section - Only show on Activity tab */}
         {activeTab === 'activity' && (
-          <div className="mb-6">
+          <div className="mb-6 mt-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Hoje</h2>
             </div>
@@ -205,14 +337,24 @@ return (
             </div>
           </div>
         )}
-        
+
         {/* Footer */}
-        <div className="text-center pb-6">
+        <div className="text-center pb-6 mt-8">
           <p className="text-xs text-gray-500">
             Privacy policy & Terms and conditions
           </p>
         </div>
       </div>
+
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }
