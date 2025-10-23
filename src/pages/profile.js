@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Coins } from "lucide-react";
 
 export default function Profile() {
 
@@ -40,7 +41,7 @@ export default function Profile() {
           <span className="text-lg font-bold text-[#14532d]">{user.trees}</span>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-2xl">⭐</span>
+          <Coins className="text-amber-500" size={28} />
           <p className="text-xs text-[#15803d] uppercase">Coins</p>
           <span className="text-lg font-bold text-[#14532d]">{user.coins}</span>
         </div>
